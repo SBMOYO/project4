@@ -1,0 +1,67 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+
+<!-- the main page that display when the site first load -->
+    <div id="posts-page" class="container">
+        <form id="post-form">
+
+            <div class="form-floating">
+
+                <label for="new_post">New Post</label>
+                <textarea class="form-control" name="post" id="new-post" cols="20" rows="4"></textarea>
+                <input id="post-user" type="hidden" value="{{user.id}}">
+                <button type="submit" class="btn btn-primary">Post</button>
+
+            </div>
+        </form>
+       
+        <div id="all-posts">
+        </div>
+    </div>
+
+
+    <!--This displays the following page with the posts made by the users who are being followed by the logged in user-->
+    <div style="display: none;" id="Following" class="container">
+        <h4>{{user.username}}'s following Page</h4>
+
+    </div>
+
+
+    <!-- this is the profile page for users -->
+    <div id="profile-page" class="container" style="display: none;">
+        <h4>Profile Page</h4>
+        <h2 id="following-h2">Name</h2>
+        <div id="following-page-hero">
+            <div id="hero-right"><span><strong>Following: </strong></span><span id="following-count">0</span></div>
+            <div id="hero-left"><span><strong>Followers: </strong></span><span id="followers-count">0</span></div>
+        </div>
+        <!--{% if user.id == request.user.id %} {% endif  %} -->
+            <button id="profile-button" type="submit" class="btn btn-primary">button</button>
+
+        <div id="profile-page-content">
+        </div>
+
+    </div>
+
+
+
+    <!-- This is the edit post page -->
+    <div id="edit-posts-page" class="container" style="display: none;">
+        <form id="edit-post-form">
+
+            <div class="form-floating">
+
+                <label for="edit_post">Edit Post</label>
+                <textarea class="form-control" name="post" id="edit-post" cols="20" rows="4"></textarea>
+                <input id="post-user" type="hidden" value="{{user.id}}">
+                <button type="submit" class="btn btn-primary">Post</button>
+
+            </div>
+        </form>
+       
+    </div>
+
+
+{% endblock %}
+
