@@ -3,7 +3,8 @@ version: '3'
 services:
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn project4.wsgi:application --bind 0.0.0.0:8000
+
     volumes:
       - .:/app
       - ./db.sqlite3:/app/db.sqlite3
@@ -17,3 +18,5 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
       - ./static:/static
+    depends_on:
+      - web

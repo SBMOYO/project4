@@ -1,25 +1,23 @@
 FROM python:3.9-slim
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app/
+COPY requirements.txt /app/
 
-# Update pip
-RUN pip install --upgrade pip
-
-# Install any needed packages specified in requirements.txt
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application code
+COPY . /app/
 
 # Collect static files
 RUN python manage.py collectstatic --noinput
 
-# Make port 8000 available to the world outside this container
+# Expose port 8000 to the world outside this container
 EXPOSE 8000
 
 # Define environment variable
 ENV PYTHONUNBUFFERED=1
 
-# Run the Django server
+# Run the Gunicorn server
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "project4.wsgi:application"]
